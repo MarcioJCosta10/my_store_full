@@ -73,6 +73,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_store_full.wsgi.application'
 
+# to talk to django that use my model user personalize
+AUTH_USER_MODEL = 'accounts.Account' 
+
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -107,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'pe-BR'
+LANGUAGE_CODE = 'pt-BR'
 
 TIME_ZONE = 'America/Sao_Paulo'
 
