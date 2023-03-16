@@ -8,11 +8,11 @@ class MyAccountManager(BaseUserManager):
         if not username:
             raise ValueError('User must have an username')
         user = self.model(
-            # normalize_email define email lowercase
-            email = self.normalize_email(email),
-            username = username,
             first_name = first_name,
-            last_name = last_name
+            last_name = last_name,
+            username = username,
+             # normalize_email define email lowercase
+            email = self.normalize_email(email),
             
         
     )
@@ -21,18 +21,18 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
     
-    def create_super_user(self, firs_name, last_name, email, username, password):
+    def create_superuser(self, first_name, last_name, email, username, password):
         user = self.create_user(
-            email = self.normalize_email('email'),
+            first_name= first_name,
+            last_name= last_name,
+            email = self.normalize_email(email),
             username = username,
-            password = password,
-            first_name= firs_name,
-            last_name= last_name,            
+            password = password,        
         )
-        user.is_admin = True,
-        user.is_active = True,
-        user.is_staff= True,
-        user.is_superadmin = True,
+        user.is_admin = True
+        user.is_active = True
+        user.is_staff= True
+        user.is_superadmin = True
         user.save(using=self._db)
         return user       
 
@@ -56,10 +56,11 @@ class Account(AbstractBaseUser):
     is_superadmin        = models.BooleanField(default=False)
 
     USERNAME_FIELD      = 'email'
-    REQUIRED_FIELDS     = ['username','firs_name', 'last_name']
+    REQUIRED_FIELDS     = ['username','first_name', 'last_name']
     
     # to talk Account that use MyAccountManager
     objects = MyAccountManager()
+    
     def __str__(self):
         return self.email
     
