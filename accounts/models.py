@@ -12,9 +12,7 @@ class MyAccountManager(BaseUserManager):
             last_name = last_name,
             username = username,
              # normalize_email define email lowercase
-            email = self.normalize_email(email),
-            
-        
+            email = self.normalize_email(email),       
     )
 
         user.set_password(password)

@@ -16,8 +16,7 @@ class AccountAdmin(UserAdmin):
         
     )
     
-    #criar linsk nos titulos das colunas
-    
+    #criar linsk nos titulos das colunas    
     list_display_links = (
         'email',
         'first_name',
