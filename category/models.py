@@ -12,8 +12,8 @@ class Category(models.Model):
         verbose_name_plural = 'categories'
         
         # self is passed because we be using functions into class methods
-        def get_url(self):
-            return reverse('product_by_category', args=[self.slug])
+    def get_url(self):
+        return reverse('product_by_category', args=[self.slug])
             
     
     def __str__(self):
