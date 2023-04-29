@@ -1,5 +1,7 @@
 from django.db import models
 from store.models import Product
+from django.urls import reverse
+
 
 # Create your models here.
 class Cart(models.Model):
@@ -15,6 +17,7 @@ class CartItem(models.Model):
     quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
     
+            
     def __str__(self):
         return self.product
     
