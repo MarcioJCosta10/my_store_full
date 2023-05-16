@@ -41,7 +41,7 @@
                                 </div>
                                 <input type="text" class="form-control"  value="{{  cart_item.quantity }}">
                                 <div class="input-group-append">
-                                <button class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </button>
+                                <a href="{% url 'add_cart' cart_item.product.id %}"class="btn btn-light" type="button" id="button-minus"> <i class="fa fa-plus"></i> </a>
                                 </div>
                             </div> <!-- input-group.// -->
                         </div> <!-- col.// -->
@@ -69,7 +69,7 @@
             <div class="card-body">
                 <dl class="dlist-align">
                   <dt>Total price:</dt>
-                  <dd class="text-right">$69.97</dd>
+                  <dd class="text-right">${{ total }}</dd>
                 </dl>
                 <dl class="dlist-align">
                   <dt>Tax:</dt>
