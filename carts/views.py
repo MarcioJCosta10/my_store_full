@@ -34,8 +34,7 @@ def add_cart(request, product_id):
             cart=cart
             )
         cart_item.save()
-    return HttpResponse(cart_item.product)
-    #return redirect('cart')       
+    return redirect('cart')       
 
 # Create your views here.art
 def cart(request, total=0, quantity=0, cart_items=None):
@@ -46,9 +45,9 @@ def cart(request, total=0, quantity=0, cart_items=None):
         cart_items = CartItem.objects.filter(cart=cart, is_active=True)
         #calculate total quantity and total items in cart
         for cart_item in cart_items:
-            total += (cart_item.price * cart_item.quantity)
+            total += (cart_item.product.price * cart_item.quantity)
             quantity += cart_item.quantity
-    except cart.ObjectNotExists:
+    except Cart.DoesNotExist:
         pass # just ignore
     
     context = {
