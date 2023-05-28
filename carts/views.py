@@ -47,6 +47,16 @@ def remove_cart(request, product_id):
     else:
         cart_item.delete()        
     return redirect('cart')
+
+def remove_cart_item(request, product_id):
+    cart = Cart.objects.get(cart_id=_cart_id(request))
+                                #model Product 
+    product = get_object_or_404(Product, id=product_id)
+    cart_item = CartItem.objects.get(product=product, cart=cart)  
+    cart_item.delete()      
+    return redirect('cart')  
+    
+    
       
 
 # Create your views here.art
