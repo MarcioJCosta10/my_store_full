@@ -45,9 +45,8 @@ def remove_cart(request, product_id):
         cart_item.quantity -= 1
         cart_item.save()
     else:
-        cart_item.delete()
-        
-    #return redirect('cart')
+        cart_item.delete()        
+    return redirect('cart')
       
 
 # Create your views here.art
@@ -67,13 +66,13 @@ def cart(request, total=0, quantity=0, cart_items=None):
     except ObjectDoesNotExist:
         pass # just ignore
     
-    context = {
-        'total': total,
-        'quantity': quantity,
-        'cart_items': cart_items,
-        'taxa':              tax,
-        'grand_total': grand_total,       
-    }
-            
+        context = {
+            'total': total,
+            'quantity': quantity,
+            'cart_items': cart_items,
+            'taxa':              tax,
+            'grand_total': grand_total,       
+        }
+                
     return render(request, 'store/cart.html', context)
     
