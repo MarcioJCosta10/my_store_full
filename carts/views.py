@@ -37,7 +37,7 @@ def add_cart(request, product_id):
     return redirect('cart')
 
 def remove_cart(request, product_id):
-    cart = Cart.objects.get(car_id=_cart_id(request))
+    cart = Cart.objects.get(cart_id=_cart_id(request))
                                 #model Product 
     product = get_object_or_404(Product, id=product_id)
     cart_item = CartItem.objects.get(product=product, cart=cart)  
@@ -66,13 +66,13 @@ def cart(request, total=0, quantity=0, cart_items=None):
     except ObjectDoesNotExist:
         pass # just ignore
     
-        context = {
-            'total': total,
-            'quantity': quantity,
-            'cart_items': cart_items,
-            'taxa':              tax,
-            'grand_total': grand_total,       
-        }
+    context = {
+        'total': total,
+        'quantity': quantity,
+        'cart_items': cart_items,
+        'taxa':              tax,
+        'grand_total': grand_total,       
+    }
                 
     return render(request, 'store/cart.html', context)
     
