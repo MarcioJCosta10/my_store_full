@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from store.models import Product
 from .models import Cart, CartItem
 
@@ -33,7 +33,12 @@ def add_cart(request, product_id):
             cart=cart
             )
         cart_item.save()
-    return redirect('cart')       
+    return redirect('cart')
+
+def remove_cart(request, product_id):
+    cart = Cart.objects.get(car_id=_cart_id(request))
+                                #model Product 
+    product = get_object_or_404(Product, id=product_id)      
 
 # Create your views here.art
 def cart(request, total=0, quantity=0, cart_items=None):
