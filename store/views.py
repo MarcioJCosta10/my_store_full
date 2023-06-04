@@ -1,8 +1,10 @@
+
 from django.forms import SlugField
 from django.shortcuts import render, get_object_or_404
 from .models import Product
 from category.models import Category
 from carts.models import CartItem
+from carts.views import _cart_id
 
 # Create your views here.
 def store(request, category_slug=None):
@@ -27,10 +29,13 @@ def store(request, category_slug=None):
 def product_detail(request, category_slug, product_slug):
       try:                                     #sintaxe to access slug category
             single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
-            in_cart = CartItem.objects.filter(cart__cart_id)
+            #cart__cart_id: using double underscore because cart is foreignKey to cart_id in Cart and returns if exists this brings true or false
+            in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request), product= single_product).exists()
+
       except Exception as e:
             raise e
       context = {
-            'single_product': single_product
+            'single_product': single_product,
+            'in_cart'       : in_cart
       }
       return render(request, 'store/product_detail.html' , context)
