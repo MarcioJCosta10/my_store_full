@@ -2,6 +2,7 @@ from django.forms import SlugField
 from django.shortcuts import render, get_object_or_404
 from .models import Product
 from category.models import Category
+from carts.models import CartItem
 
 # Create your views here.
 def store(request, category_slug=None):
@@ -26,6 +27,7 @@ def store(request, category_slug=None):
 def product_detail(request, category_slug, product_slug):
       try:                                     #sintaxe to access slug category
             single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
+            in_cart = CartItem.objects.filter(cart__cart_id)
       except Exception as e:
             raise e
       context = {
