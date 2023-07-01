@@ -9,10 +9,14 @@ def _cart_id(request):
     cart = request.session.session_key
     if not cart:
         cart = request.session.create()
-    return cart
-        
+    return cart        
 
 def add_cart(request, product_id):
+    color = request.GET['color']
+    size = request.GET['size']
+    return HttpResponse(color+ " " +size)
+    exit()
+    
     product = Product.objects.get(id=product_id)
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request)) # get the cart_id using cart_id present in the session 
@@ -54,10 +58,7 @@ def remove_cart_item(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart_item = CartItem.objects.get(product=product, cart=cart)  
     cart_item.delete()      
-    return redirect('cart')  
-    
-    
-      
+    return redirect('cart')    
 
 # Create your views here.art
 def cart(request, total=0, quantity=0, cart_items=None):
@@ -87,4 +88,3 @@ def cart(request, total=0, quantity=0, cart_items=None):
     }
                 
     return render(request, 'store/cart.html', context)
-    
