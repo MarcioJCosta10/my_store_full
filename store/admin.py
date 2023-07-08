@@ -7,6 +7,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 class variationAdmin(admin.ModelAdmin):
     list_display = ('product', 'variation_category', 'variation_value', 'is_active')
+    list_editable = ('is_active',)
+    list_filter = ('product', 'variation_category', 'variation_value')
     
 # Register your models here.
 
