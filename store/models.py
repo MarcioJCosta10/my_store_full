@@ -20,5 +20,9 @@ class Product(models.Model):
     
     def __str__(self):
         return self.product_name
-        
+
+class Variation(models.Model):
+    product = models.ForeignKey(Product, on_delete="CASCADE")
+    variation_category = models.CharField(max_length=200, choices=variation_category_choice)
+    
     
